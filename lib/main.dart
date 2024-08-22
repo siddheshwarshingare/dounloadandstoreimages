@@ -72,7 +72,7 @@ class _ImageCaptureScreenState extends State<ImageCaptureScreen> {
         children: [
           ElevatedButton(
             onPressed: _takePicture,
-            child: const Text('Takesdfsdf Picture'),
+            child: const Text('Take Picture'),
           ),
         ],
       ),
