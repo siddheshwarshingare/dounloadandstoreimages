@@ -39,13 +39,25 @@ class _ImageCaptureScreenState extends State<ImageCaptureScreen> {
 
       // Save the image to the gallery
       await GallerySaver.saveImage(savedImage.path);
-      print('Saved image to: ${savedImage.path} and Gallery');
 
       setState(() {
         _images.add(savedImage);
+        // Show a SnackBar when an image is successfully added
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              'Image saved successfully!',
+              style: TextStyle(color: Colors.pink),
+            ),
+          ),
+        );
       });
     } else {
-      print('No image selected.');
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text("No image selected."),
+        ),
+      );
     }
   }
 
@@ -61,19 +73,32 @@ class _ImageCaptureScreenState extends State<ImageCaptureScreen> {
   @override
   void initState() {
     super.initState();
+    // Uncomment if you want to load previously saved images on startup
     // _loadSavedImages();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Image Capture and Gallery')),
+      backgroundColor: Color.fromARGB(255, 144, 116, 177),
+      appBar: AppBar(
+        backgroundColor: const Color.fromARGB(255, 4, 163, 123),
+        title: const Text('Take photo and store in gallery'),
+      ),
       body: Column(
         children: [
-          ElevatedButton(
-            onPressed: _takePicture,
-            child: const Text('Take Picture'),
+          Padding(
+            padding: const EdgeInsets.only(top: 200, left: 100),
+            child: ElevatedButton(
+              onPressed: _takePicture,
+              style: ElevatedButton.styleFrom(
+                backgroundColor:
+                    Color.fromARGB(255, 68, 224, 20), // Button color
+              ),
+              child: const Text('Take Picture'),
+            ),
           ),
+          // Add a widget here to display the images if needed
         ],
       ),
     );
